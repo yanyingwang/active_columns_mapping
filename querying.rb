@@ -3,7 +3,7 @@ module ActiveRecord
     def find_by_sql(sql, binds = [], preparable: nil, &block)
       result_set = connection.select_all(sanitize_sql(sql), "#{name} Load", binds, preparable: preparable)
 
-      ##### columns-mapping
+      ## make columns_mapping work
       result_set.instance_variable_set :@columns, result_set.columns.map { |e|  columns_mapping[e].present? ? columns_mapping[e] : e }
 
       column_types = result_set.column_types.dup
